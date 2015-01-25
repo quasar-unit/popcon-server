@@ -1,0 +1,16 @@
+language: java
+
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install -qq sshpass
+install: true
+script: mvn test package
+
+env:
+  global:
+    - secure: "xA+/Zjwa3bfJR/XfwK/m/bNYVHASdqxBTaFRjaVr5ApDUYAKuK6oG9RgQ1KGMQfE63N1a0g4lGOnehqujCTOdd7CqV++WDTSIXZj5MGWJjQ+qM59uE6Tmuy8SZODTeoRj08y/oNPbEm0Pqg4KxAZv9Z8UJAukWTQpO4KFtVKnao="
+    - secure: "nkFA5cZe/pi9DF5DSK95xssDTIj+Bxr+dGeAtx/lSYPdgl9RBk4o3DYuuQRb6uFnJesNEgsgGuaZjZZiOQQ6GRDnyEWH4rUj/t07ZWYMjZBMCHVm9vjcPrNaCEJJ2ZE3dvBwUgMaTjkaJ9XNU0xuXL5QIfue2NhYwzY73ymUvxU="
+
+after_success:
+  - "sshpass -p $MY_PASSWORD scp target/popcon-server.jar $MY_USER@popcon.io:~/popcon-server.tar.gz"
+  - "sshpass -p $MY_PASSWORD ssh $MY_USER@popcon.io popcon-server/bin/stop-server.sh;rm -rf popcon-server;tar xzf popcon-server.tar.gz;popcon-server/bin/start-server.sh"
