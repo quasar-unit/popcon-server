@@ -12,5 +12,5 @@ env:
     - secure: "nkFA5cZe/pi9DF5DSK95xssDTIj+Bxr+dGeAtx/lSYPdgl9RBk4o3DYuuQRb6uFnJesNEgsgGuaZjZZiOQQ6GRDnyEWH4rUj/t07ZWYMjZBMCHVm9vjcPrNaCEJJ2ZE3dvBwUgMaTjkaJ9XNU0xuXL5QIfue2NhYwzY73ymUvxU="
 
 after_success:
-  - "sshpass -p $MY_PASSWORD scp target/popcon-server.jar $MY_USER@popcon.io:~/popcon-server.tar.gz"
-  - "sshpass -p $MY_PASSWORD ssh $MY_USER@popcon.io popcon-server/bin/stop-server.sh;rm -rf popcon-server;tar xzf popcon-server.tar.gz;popcon-server/bin/start-server.sh"
+  - "sshpass -p $MY_PASSWORD scp -o StrictHostKeyChecking=no target/popcon-server.jar $MY_USER@popcon.io:~/popcon-server.tar.gz"
+  - "sshpass -p $MY_PASSWORD ssh -o StrictHostKeyChecking=no $MY_USER@popcon.io popcon-server/bin/stop-server.sh;rm -rf popcon-server;tar xzf popcon-server.tar.gz;popcon-server/bin/start-server.sh"
