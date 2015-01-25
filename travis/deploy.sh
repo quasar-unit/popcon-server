@@ -17,10 +17,6 @@ function execute() {
 
   echo ${msg}
   ${SSH} ${TARGET} ${cmd}
-
-  if [ $? != 0 ]; then
-    exit $?
-  fi
 }
 
 echo "copy to popcon-server"

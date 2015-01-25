@@ -8,7 +8,6 @@ cd ${POPCON_HOME}
 if [ -f "popcon-server.pid" ]; then
   PID=$(cat popcon-server.pid)
   kill ${PID}
-  wait ${PID}
 else
   echo "popcon-server is not started"
 fi
